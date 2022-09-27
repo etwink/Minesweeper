@@ -1,0 +1,145 @@
+﻿@model Minesweeper.Models.Game
+
+@{
+    ViewData["Title"] = "Index";
+}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="~/css/minesweeper.css" />
+    <script type="text/javascript" language="javascript" src="~/js/minesweeper_board.js"></script>
+    <link rel="icon" href="~/lib/icons/minesweeper_icon.png" />
+    <script>
+        function revealBombs() {
+            var isChecked = document.getElementById("revealBombsCheckbox").checked;
+            var bombs = document.getElementsByClassName("bomb");
+            for (var i = 0; i < bombs.length; ++i) {
+                if (isChecked) { bombs[i].classList.add("revealed"); }
+                else { bombs[i].classList.remove("revealed"); }
+            }
+            document.getElementById("hsEnabled").innerHTML = "False";
+        }
+
+    function showEffectiveLabel() {
+        if (document.getElementsByClassName("checked").length === 0) { return; }
+        var checkedSquares = document.getElementsByClassName("checked");
+        var isChecked = document.getElementById("effectiveLabelCheck").checked;
+        for (var i = 0; i < checkedSquares.length; ++i) {
+            var square = checkedSquares[i];
+            if (parseInt(square.getAttribute("data")) != 0) {
+                if (isChecked) {
+                    square.classList.add("effective-label");
+                    square.innerHTML = square.getAttribute("elabel");
+                }
+                else {
+                    square.classList.remove("effective-label");
+                    square.innerHTML = square.getAttribute("data");
+                }
+                    
+            }
+        }
+        document.getElementById("hsEnabled").innerHTML = "False";
+    }
+    </script>
+</head>
+<body>
+    <div>
+        @{
+            Game game = (Game)ViewData["Game"];
+            List<Game> gameList = (List<Game>)ViewData["Highscores"];
+        }
+        <h1 style="text-align:center">Minesweeper</h1>
+        <h2 style="text-align:center" id="difficulty" data="@game.Difficulty">Difficulty: @game.Difficulty</h2>
+        <div style="text-align:center">
+            <p class="time-elapsed">Time Elapsed: </p>
+            <p class="time-elapsed" id="timeElapsed">0 seconds</p>
+        </div>
+        <p>
+            <a href="https://dash.harvard.edu/bitstream/handle/1/14398552/BECERRA-SENIORTHESIS-2015.pdf" target="_blank">Link to minesweeper solver</a>
+        </p>
+    </div>
+    <div id="overlay">
+        <div class="end-game">
+            <h3 id="gameStatus"></h3>
+            <form asp-controller="Games" asp-action="postHighScore" method="post" style="display: flex; flex-direction: column; align-items: center;">
+                <div>
+                    <label for="Name">Username (3 characters):</label>
+                    <input type="text" id="Name" name="Name" placeholder="Enter Name Here"/>
+                </div>
+                <p id="scoreLabel" style="margin:auto;"></p>
+                <input type="hidden" id="Score" name="Score" />
+                <p id="difficultyLabel" style="margin:auto; padding-bottom:5px;"></p>
+                <input type="hidden" id="Difficulty" name="Difficulty" value="@game.Difficulty"/>
+                <input type="submit" id="scoreSubmit" value="Submit Score"/>
+            </form>
+            <div>
+                <form asp-controller="Home" asp-action="Index" style="display:inline-block;">
+                    <input type="submit" value="Go Home" style="margin:10px;"/>
+                </form>
+                <form asp-controller="Games" asp-action="Index" style="display:inline-block;">
+                    <input type="hidden" name="difficulty" value="@game.Difficulty" />
+                    <input type="submit" value="Play Again" />
+                </form>
+
+            </div>
+            
+        </div>
+    </div>
+    <div style="height:auto; width:min-content; margin:auto; border:ridge;">
+        <div class="grid" id="msBoard"></div>
+    </div>
+    <br />
+    <div style="display:flex; flex-direction:row; justify-content: center;">
+        <div class="highscores-list" style="margin-right:25%;">
+            <table id="hsTable">
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Score
+                    </th>
+                </tr>
+                @{
+                    foreach(Game g in gameList)
+                    {
+                        <tr>
+                            <td>
+                                @g.Name
+                            </td>
+                            <td>
+                                @g.Score
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+        <div style="margin-left: 25%;">
+            <div>
+                <input type="checkbox" class="checkbox" id="revealBombsCheckbox" onclick="revealBombs()"/>
+                <label for="revealBombsCheckbox">Reveal Bombs</label>
+            </div>
+            <div>
+                <input type="checkbox" class="checkbox" id="effectiveLabelCheck" onclick="showEffectiveLabel()"/>
+                <label for="effectiveLabelCheck">Show Effective Labels</label>
+            </div>
+            <div>
+                <table>
+                    <tr>
+                        <td>Highscore Enabled:</td>
+                        <td id="hsEnabled">True</td>
+                    </tr>
+                </table>
+            </div>
+            <div style="margin:auto;">
+                <form asp-controller="Home" asp-action="Index">
+                    <input type="submit" value="Go Home"/>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+
