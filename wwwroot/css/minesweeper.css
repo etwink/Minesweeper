@@ -101,6 +101,17 @@ p.time-elapsed {
     background-color: yellow;
 }
 
+.effective-label0 {
+    background-color: lightgreen;
+    font-style: italic;
+}
+
+.effective-label-negative {
+    background-color: indianred;
+    font-style: italic;
+    font-weight: bold;
+}
+
 .effective-label {
     background-color: dodgerblue;
     font-style: italic;

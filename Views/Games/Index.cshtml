@@ -9,6 +9,9 @@
     <script type="text/javascript" language="javascript" src="~/js/minesweeper_board.js"></script>
     <link rel="icon" href="~/lib/icons/minesweeper_icon.png" />
     <script>
+        var gameStarted = false;
+        var startTime = 0;
+        var elapsedTime = 0;
         function revealBombs() {
             var isChecked = document.getElementById("revealBombsCheckbox").checked;
             var bombs = document.getElementsByClassName("bomb");
@@ -28,10 +31,14 @@
             if (parseInt(square.getAttribute("data")) != 0) {
                 if (isChecked) {
                     square.classList.add("effective-label");
+                    if (square.getAttribute("elabelComplete") === "1") square.classList.replace("effective-label", "effective-label0");
+                    if (parseInt(square.getAttribute("elabel")) < 0) square.classList.replace("effective-label", "effective-label-negative");
                     square.innerHTML = square.getAttribute("elabel");
                 }
                 else {
                     square.classList.remove("effective-label");
+                    square.classList.remove("effective-label0");
+                    square.classList.remove("effective-label-negative");
                     square.innerHTML = square.getAttribute("data");
                 }
                     
@@ -88,7 +95,7 @@
         <div class="grid" id="msBoard"></div>
     </div>
     <br />
-    <div style="display:flex; flex-direction:row; justify-content: center;">
+    <div id="hsDiv" style="display:flex; flex-direction:row; justify-content: center;">
         <div class="highscores-list" style="margin-right:25%;">
             <table id="hsTable">
                 <tr>
@@ -99,19 +106,16 @@
                         Score
                     </th>
                 </tr>
-                @{
-                    foreach(Game g in gameList)
-                    {
-                        <tr>
-                            <td>
-                                @g.Name
-                            </td>
-                            <td>
-                                @g.Score
-                            </td>
-                        </tr>
-                    }
-                }
+                @{foreach(Game g in gameList) {
+                                <tr>
+                                    <td>
+                                        @g.Name
+                                    </td>
+                                    <td>
+                                        @g.Score
+                                    </td>
+                                </tr>
+                }}
             </table>
         </div>
         <div style="margin-left: 25%;">
