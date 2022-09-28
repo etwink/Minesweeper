@@ -189,7 +189,14 @@
                 square.setAttribute('id', j + "," + i);
                 square.setAttribute('elabel', "0");
                 square.setAttribute("elabelComplete", "0");
-                square.setAttribute("markedNeighbors", "0");
+                let markedNeighbors = 0;
+                if ((i === 0 || i === height - 1) && (j === 0 || j === width - 1)) {
+                    markedNeighbors = 5;
+                }
+                else if ((i === 0 || i === height - 1) || (j === 0 || j === width - 1)) {
+                    markedNeighbors = 3;
+                }
+                square.setAttribute("markedNeighbors", markedNeighbors);
                 square.style.width = sqSize + "px";
                 square.style.height = sqSize + "px";
                 if (board[i][j] === 9) { square.classList.add("bomb"); }

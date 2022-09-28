@@ -70,7 +70,7 @@
             <form asp-controller="Games" asp-action="postHighScore" method="post" style="display: flex; flex-direction: column; align-items: center;">
                 <div>
                     <label for="Name">Username (3 characters):</label>
-                    <input type="text" id="Name" name="Name" placeholder="Enter Name Here"/>
+                    <input type="text" id="Name" name="Name" placeholder="Enter Name Here" maxlength="3" minlength="3"/>
                 </div>
                 <p id="scoreLabel" style="margin:auto;"></p>
                 <input type="hidden" id="Score" name="Score" />
@@ -107,14 +107,14 @@
                     </th>
                 </tr>
                 @{foreach(Game g in gameList) {
-                                <tr>
-                                    <td>
-                                        @g.Name
-                                    </td>
-                                    <td>
-                                        @g.Score
-                                    </td>
-                                </tr>
+                    <tr>
+                        <td>
+                            @g.Name
+                        </td>
+                        <td>
+                            @g.Score
+                        </td>
+                    </tr>
                 }}
             </table>
         </div>

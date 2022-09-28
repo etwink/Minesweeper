@@ -1,38 +1,128 @@
-﻿@{
+﻿@model Minesweeper.Models.Game
+
+@{
     ViewData["Title"] = "Minesweeper Game";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Hello and thank you for visiting!</p>
-    <form asp-controller="Games" asp-action="Index">
-        <input type="radio" id="Beginner" name="difficulty" value="Beginner" checked/>
-        <label for="Beginner">Beginner</label>
-        <input type="radio" id="Intermediate" name="difficulty" value="Intermediate" />
-        <label for="Intermediate">Intermediate</label>
-        <input type="radio" id="Expert" name="difficulty" value="Expert" />
-        <label for="Expert">Expert</label>
-        <br />
-        <input type="submit" value="Get Started!" />
-    </form>
-</div>
-<div style="padding:5px;">
-    <p>
-        Minesweeper Rules: Your first click is always safe. Left click to uncover a square. Right click to plant a flag (&#128681) which signifies a mine (&#128163).
-    </p>
-    <p>
-        The goal of the game is to uncover all of the squares that do not have a mine in the least amount of time possible.
-    </p>
-    <p>
-        The three difficulties are Beginner, Intermediate, and Expert. Beginner difficulty is a 10x10 board with 10 mines. Intermediate difficulty is a 16x16 board with 40 mines. Expert difficulty is a 16x30 board with 99 mines.
-    </p>
-    <p>
-        There are two helper options that you can use but enabling either will disqualify you from submitting your score to the highscores list! 
-    </p> 
-    <p>
-        One option will show you the effective label of uncovered squares. This is calculated as: effective label = label - number of neighboring flags. So if the effective label of a square is 2, that means there are 2 mines that haven't been marked by a flag neighboring this square.
-    </p>
-    <p>
-        The other option will highlight all of the mines on the board.
-    </p>
-</div>
+<head>
+    <style>
+        th, td {
+            padding:4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Hello and thank you for visiting!</p>
+        <form asp-controller="Games" asp-action="Index">
+            <input type="radio" id="Beginner" name="difficulty" value="Beginner" checked/>
+            <label for="Beginner">Beginner</label>
+            <input type="radio" id="Intermediate" name="difficulty" value="Intermediate" />
+            <label for="Intermediate">Intermediate</label>
+            <input type="radio" id="Expert" name="difficulty" value="Expert" />
+            <label for="Expert">Expert</label>
+            <br />
+            <input type="submit" value="Get Started!" />
+        </form>
+    </div>
+    <div style="padding:5px;">
+        <p>
+            Minesweeper Rules: Your first click is always safe. Left click to uncover a square. Right click to plant a flag (&#128681) which signifies a mine (&#128163).
+        </p>
+        <p>
+            The goal of the game is to uncover all of the squares that do not have a mine in the least amount of time possible.
+        </p>
+        <p>
+            The three difficulties are Beginner, Intermediate, and Expert. Beginner difficulty is a 10x10 board with 10 mines. Intermediate difficulty is a 16x16 board with 40 mines. Expert difficulty is a 16x30 board with 99 mines.
+        </p>
+        <p>
+            There are two helper options that you may use but enabling either will disqualify you from submitting your score to the highscores list! 
+        </p> 
+        <ul>
+            <li style="padding:5px;">
+                One option will show you the effective label of uncovered squares. This is calculated as: effective label = label - number of neighboring flags. So if the effective label of a square is 2, that means there are 2 mines that haven't been marked by a flag neighboring this square.
+            </li>
+            <li style="padding:5px;">
+                The other option will highlight all of the mines on the board.
+            </li>
+        </ul>
+    </div>
+    <div style="display:flex; flex-direction:row;">
+        @{
+            List<Game> beginnerList = (List<Game>)ViewData["Beginner"];
+            List<Game> intermediateList = (List<Game>)ViewData["Intermediate"];
+            List<Game> expertList = (List<Game>)ViewData["Expert"];
+                    <div style="margin-left: 10%;">
+                        <label for="beginnerList">Beginner Highscores</label>
+                        <table id="beginnerList">
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Score
+                            </th>
+                        </tr>
+                        @foreach(Game g in beginnerList) {
+                            <tr>
+                                <td>
+                                    @g.Name
+                                </td>
+                                <td>
+                                    @g.Score
+                                </td>
+                            </tr>
+            }
+                        </table>
+                    </div>
+                    <div style="margin-left:auto; margin-right:auto;">
+                        <label for="intermediateList">Intermediate Highscores</label>
+                        <table id="intermediateList">
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Score
+                            </th>
+                        </tr>
+                        @foreach(Game g in intermediateList) {
+                            <tr>
+                                <td>
+                                    @g.Name
+                                </td>
+                                <td>
+                                    @g.Score
+                                </td>
+                            </tr>
+            }
+                        </table>
+                    </div>
+                    <div style="margin-right: 10%;">
+                        <label for="expertList">Expert Highscores</label>
+                        <table id="expertList">
+                        @foreach(Game g in expertList) {
+                            <tr>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Score
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @g.Name
+                                </td>
+                                <td>
+                                    @g.Score
+                                </td>
+                            </tr>
+            }
+                        </table>
+                    </div>
+        }
+    </div>
+</body>
+

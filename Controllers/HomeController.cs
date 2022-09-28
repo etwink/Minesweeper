@@ -1,20 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Minesweeper.Models;
+using Minesweeper.Data;
 using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 
 namespace Minesweeper.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly MinesweeperContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(MinesweeperContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            ViewData["Beginner"] = await _context.Game.Where(x => x.Difficulty == "Beginner").OrderBy(x => x.Score).Take(5).ToListAsync();
+            ViewData["Intermediate"] = await _context.Game.Where(x => x.Difficulty == "Intermediate").OrderBy(x => x.Score).Take(5).ToListAsync();
+            ViewData["Expert"] = await _context.Game.Where(x => x.Difficulty == "Expert").OrderBy(x => x.Score).Take(5).ToListAsync();
             return View();
         }
 
