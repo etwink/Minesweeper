@@ -46,8 +46,7 @@
                     square.classList.remove("effective-label0");
                     square.classList.remove("effective-label-negative");
                     square.innerHTML = square.getAttribute("data");
-                }
-                    
+                }      
             }
         }
         document.getElementById("hsEnabled").innerHTML = "False";
@@ -55,21 +54,10 @@
     </script>
 </head>
 <body>
-    <div>
-        @{
-            Game game = (Game)ViewData["Game"];
-            List<Game> gameList = (List<Game>)ViewData["Highscores"];
-        }
-        <h1 style="text-align:center">Minesweeper</h1>
-        <h2 style="text-align:center" id="difficulty" data="@game.Difficulty">Difficulty: @game.Difficulty</h2>
-        <div style="text-align:center">
-            <p class="time-elapsed">Time Elapsed: </p>
-            <p class="time-elapsed" id="timeElapsed">0 seconds</p>
-        </div>
-        <p>
-            <a href="https://dash.harvard.edu/bitstream/handle/1/14398552/BECERRA-SENIORTHESIS-2015.pdf" target="_blank">Link to minesweeper solver</a>
-        </p>
-    </div>
+    @{
+        Game game = (Game)ViewData["Game"];
+        List<Game> gameList = (List<Game>)ViewData["Highscores"];
+    }
     <div id="overlay">
         <div class="end-game">
             <h3 id="gameStatus"></h3>
@@ -95,13 +83,31 @@
             </div>
         </div>
     </div>
-    <div style="height:auto; width:min-content; margin:auto; border:ridge;">
-        <div class="grid" id="msBoard"></div>
+    <div>
+        <h1 style="text-align:center">Minesweeper</h1>
+        <h2 style="text-align:center" id="difficulty" data="@game.Difficulty">Difficulty: @game.Difficulty</h2>
+    </div>
+    <div style="margin:auto;">
+        <div style="height:auto; width:min-content; margin:auto; border:ridge; border-color:dimgray; background-color:lightgray;">
+            <div style="display:flex; flex-direction: row; justify-content:center; padding-top:2px; padding-bottom:2px;">
+                <div style="text-align:center; margin:auto;">
+                    <p class="time-elapsed" style="margin:auto;">Score: </p>
+                    <p class="time-elapsed" id="timeElapsed" style="margin:auto;">0</p>
+                </div>
+                <div style="text-align:center; margin:auto; font-size: 20px;">
+                    <p style="display:inline-block; margin:auto;">&#128681</p>
+                    <p id="flagRemaining" style="display:inline-block; margin:auto;">10</p>
+                </div>
+            </div>
+            <div style="border-top:ridge dimgray;">
+                <div class="grid" id="msBoard"></div>
+            </div>
+        </div>
     </div>
     <br />
     <div id="hsDiv" style="display:flex; flex-direction:row; justify-content: center;">
         <div class="highscores-list" style="width:25%;">
-            <table id="hsTable" style="margin:auto; text-align:center;">
+            <table id="hsTable" style="margin-right:0; margin-left:auto; text-align:center;">
                 <tr>
                     <th>
                         Name

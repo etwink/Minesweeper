@@ -6,6 +6,7 @@
     let bombs = [];
     let valid = [];
     let numValidChecked = 0;
+    let _board = [[]];
     let sqSize = 40;
 
     function click(board, square) {
@@ -43,6 +44,7 @@
         if (square.classList.contains("flag")) {
             square.classList.remove("flag");
             square.innerHTML = "";
+            document.getElementById("flagRemaining").innerHTML = parseInt(document.getElementById("flagRemaining").innerHTML) + 1; 
             let coords = square.getAttribute("id").split(",");
             let i = parseInt(coords[0]);
             let j = parseInt(coords[1]);
@@ -61,6 +63,7 @@
         }
         square.classList.add("flag");
         square.innerHTML = "&#128681";
+        document.getElementById("flagRemaining").innerHTML = parseInt(document.getElementById("flagRemaining").innerHTML) - 1; 
         updateNeighbors(board, square);
         let coords = square.getAttribute("id").split(",");
         let i = parseInt(coords[0]);
@@ -169,7 +172,7 @@
     function elapsedTime() {
         var t = Math.floor((Date.now() - startTime) / 1000);
         if (!isGameOver) {
-            document.getElementById("timeElapsed").innerHTML = t + " seconds";
+            document.getElementById("timeElapsed").innerHTML = t;
             setTimeout(() => {
                 elapsedTime();
             }, 1000);
@@ -229,6 +232,7 @@
             numOfMines = 99;
             sqSize = 30;
         }
+        document.getElementById("flagRemaining").innerHTML = numOfMines;
 
         let board = new Array(boardHeight);
         for (var i = 0; i < boardHeight; ++i) {
@@ -341,6 +345,9 @@
                 document.getElementById("scoreSubmit").remove();
                 document.getElementById("NameLabel").remove();
                 document.getElementById("Name").remove();
+                if (document.getElementById("effectiveLabelCheck").checked) {
+                    document.getElementById("effectiveLabelCheck").click();
+                }
             }
         }
         else {
