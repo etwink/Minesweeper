@@ -33,7 +33,7 @@ namespace Minesweeper.Models
                     new Game
                     {
                         GameId = now.Year.ToString() + now.Month.ToString() + now.Day.ToString() + now.Minute.ToString() + now.Second.ToString() + "1500",
-                        Name = "hzy",
+                        Name = "cnr",
                         Difficulty = "Expert",
                         Score = 1500,
                     }

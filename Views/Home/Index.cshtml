@@ -44,7 +44,7 @@
             There are two helper options that you may use but enabling either will disqualify you from submitting your score to the highscores list! 
         </p> 
         <p>
-            One option will show you the effective label of uncovered squares. This is calculated as: effective label = label - number of neighboring flags. So if the effective label of a square is 2, that means there are 2 mines that haven't been marked by a flag neighboring this square. An effective label of 0 means that all of the neighboring squares that are not marked by a flag should be free of mines.
+            One option will show you the effective label of uncovered squares. This is calculated as: effective label = label - number of neighboring flags. So if the effective label of a square is 2, that means there are 2 mines that haven't been marked by a flag neighboring this square. An effective label of 0 means that all of the neighboring squares that are not marked by a flag should be free of mines assuming that all of the surrounding mines were properly marked with flags. A negative effective label means that there are too many flags neighboring that square.
         </p>
         <p>
             The other option will highlight all of the mines on the board.

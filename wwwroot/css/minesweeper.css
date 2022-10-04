@@ -107,13 +107,13 @@ p.time-elapsed {
 }
 
 .effective-label-negative {
-    background-color: indianred;
+    background-color: lightpink;
     font-style: italic;
     font-weight: bold;
 }
 
 .effective-label {
-    background-color: dodgerblue;
+    background-color: lightblue;
     font-style: italic;
 }
 

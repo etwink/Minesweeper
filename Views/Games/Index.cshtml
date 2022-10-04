@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="~/css/minesweeper.css" />
     <script type="text/javascript" language="javascript" src="~/js/minesweeper_board.js"></script>
     <link rel="icon" href="~/lib/icons/minesweeper_icon.png" />
+    <style>
+        body {
+            background-color:whitesmoke;
+            color:black;
+        }
+    </style>
     <script>
         var gameStarted = false;
         var startTime = 0;
@@ -86,9 +92,7 @@
                     <input type="hidden" name="difficulty" value="@game.Difficulty" />
                     <input type="submit" value="Play Again" />
                 </form>
-
             </div>
-            
         </div>
     </div>
     <div style="height:auto; width:min-content; margin:auto; border:ridge;">
@@ -96,8 +100,8 @@
     </div>
     <br />
     <div id="hsDiv" style="display:flex; flex-direction:row; justify-content: center;">
-        <div class="highscores-list" style="margin-right:25%;">
-            <table id="hsTable">
+        <div class="highscores-list" style="width:25%;">
+            <table id="hsTable" style="margin:auto; text-align:center;">
                 <tr>
                     <th>
                         Name
@@ -118,32 +122,38 @@
                 }}
             </table>
         </div>
-        <div style="margin-left: 25%;">
-            <div>
-                <input type="checkbox" class="checkbox" id="revealBombsCheckbox" onclick="revealBombs()"/>
-                <label for="revealBombsCheckbox">Reveal Bombs</label>
-            </div>
-            <div>
-                <input type="checkbox" class="checkbox" id="effectiveLabelCheck" onclick="showEffectiveLabel()"/>
-                <label for="effectiveLabelCheck">Show Effective Labels</label>
-            </div>
-            <div>
-                <table>
-                    <tr>
-                        <td>Highscore Enabled:</td>
-                        <td id="hsEnabled">True</td>
-                    </tr>
-                </table>
-            </div>
-            <div style="margin:auto;">
-                <form asp-controller="Home" asp-action="Index">
+        <div style="width:50%;">
+            <div style="text-align:center;">
+                <form asp-controller="Home" asp-action="Index" style="display:inline-block;">
                     <input type="submit" value="Go Home"/>
+                </form>
+                <form asp-controller="Games" asp-action="Index" style="display:inline-block;">
+                    <input type="hidden" name="difficulty" value="@game.Difficulty" />
+                    <input type="submit" value="Play Again" />
                 </form>
             </div>
         </div>
-
+        <div style="width:25%;">
+            <div>
+                <div>
+                    <input type="checkbox" class="checkbox" id="revealBombsCheckbox" onclick="revealBombs()"/>
+                    <label for="revealBombsCheckbox">Reveal Bombs</label>
+                </div>
+                <div>
+                    <input type="checkbox" class="checkbox" id="effectiveLabelCheck" onclick="showEffectiveLabel()"/>
+                    <label for="effectiveLabelCheck">Show Effective Labels</label>
+                </div>
+                <div>
+                    <table>
+                        <tr>
+                            <td>Highscore Enabled:</td>
+                            <td id="hsEnabled">True</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-
 </body>
 
 
