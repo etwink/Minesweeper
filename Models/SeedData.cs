@@ -18,24 +18,24 @@ namespace Minesweeper.Models
                 context.Game.AddRange(
                     new Game
                     {
-                        GameId = now.Year.ToString() + now.Month.ToString() + now.Day.ToString() + now.Minute.ToString() + now.Second.ToString() + "25",
+                        GameId = now.Year.ToString() + now.Month.ToString() + now.Day.ToString() + now.Minute.ToString() + now.Second.ToString() + "50",
                         Name = "ben",
                         Difficulty = "Beginner",
-                        Score = 25,      
+                        Score = 50,      
                     },
                     new Game
                     {
-                        GameId = now.Year.ToString() + now.Month.ToString() + now.Day.ToString() + now.Minute.ToString() + now.Second.ToString() + "75",
+                        GameId = now.Year.ToString() + now.Month.ToString() + now.Day.ToString() + now.Minute.ToString() + now.Second.ToString() + "250",
                         Name = "cam",
                         Difficulty = "Intermediate",
-                        Score = 75,
+                        Score = 250,
                     },
                     new Game
                     {
-                        GameId = now.Year.ToString() + now.Month.ToString() + now.Day.ToString() + now.Minute.ToString() + now.Second.ToString() + "225",
+                        GameId = now.Year.ToString() + now.Month.ToString() + now.Day.ToString() + now.Minute.ToString() + now.Second.ToString() + "1500",
                         Name = "hzy",
                         Difficulty = "Expert",
-                        Score = 225,
+                        Score = 1500,
                     }
                 );
                 context.SaveChanges();

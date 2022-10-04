@@ -337,7 +337,11 @@
             document.getElementById("gameStatus").innerHTML = "Winner!";
             document.getElementById("scoreLabel").innerHTML = "Score: " + endScore;
             document.getElementById("Score").value = endScore;
-            if (document.getElementById("hsEnabled").innerHTML === "False") { document.getElementById("scoreSubmit").remove() }
+            if (document.getElementById("hsEnabled").innerHTML === "False") {
+                document.getElementById("scoreSubmit").remove();
+                document.getElementById("NameLabel").remove();
+                document.getElementById("Name").remove();
+            }
         }
         else {
             document.getElementById("gameStatus").innerHTML = "Loser :(";

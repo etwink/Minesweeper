@@ -38,8 +38,8 @@ namespace Minesweeper.Controllers
         public async Task<IActionResult> postHighScore(Game game)
         {
             DateTime now = DateTime.Now;
-            string gameId = now.Year.ToString() + now.Month.ToString() + now.Day.ToString() + now.Minute.ToString() + now.Second.ToString() + game.Score.ToString();
-            if (gameId.Length > 15) { gameId = gameId.Substring(0, 16); }
+            string gameId = now.Year.ToString() + now.Month.ToString() + now.Day.ToString() + now.Minute.ToString() + now.Second.ToString() + game.Score.ToString(); //date(12 char) + score(<6 char)
+            if (gameId.Length > 18) { gameId = gameId.Substring(0, 19); }
             game.GameId = gameId;
             if (game.isValid())
             {

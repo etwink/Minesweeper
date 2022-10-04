@@ -9,12 +9,16 @@
         th, td {
             padding:4px;
         }
+        body {
+            background-color:whitesmoke;
+            color:black;
+        }
     </style>
 </head>
 <body>
-    <div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-        <p>Hello and thank you for visiting!</p>
+    <div style="padding:25px; text-align:center;">
+        <h1 class="display-4" style="padding:10px;">Minesweeper</h1>
+        <p style="margin:auto; font-weight:500;">Select one of the options below and click "Get Started!" to begin playing!</p>
         <form asp-controller="Games" asp-action="Index">
             <input type="radio" id="Beginner" name="difficulty" value="Beginner" checked/>
             <label for="Beginner">Beginner</label>
@@ -26,7 +30,7 @@
             <input type="submit" value="Get Started!" />
         </form>
     </div>
-    <div style="padding:5px;">
+    <div style="padding:5px; text-align:center;">
         <p>
             Minesweeper Rules: Your first click is always safe. Left click to uncover a square. Right click to plant a flag (&#128681) which signifies a mine (&#128163).
         </p>
@@ -39,89 +43,87 @@
         <p>
             There are two helper options that you may use but enabling either will disqualify you from submitting your score to the highscores list! 
         </p> 
-        <ul>
-            <li style="padding:5px;">
-                One option will show you the effective label of uncovered squares. This is calculated as: effective label = label - number of neighboring flags. So if the effective label of a square is 2, that means there are 2 mines that haven't been marked by a flag neighboring this square.
-            </li>
-            <li style="padding:5px;">
-                The other option will highlight all of the mines on the board.
-            </li>
-        </ul>
+        <p>
+            One option will show you the effective label of uncovered squares. This is calculated as: effective label = label - number of neighboring flags. So if the effective label of a square is 2, that means there are 2 mines that haven't been marked by a flag neighboring this square. An effective label of 0 means that all of the neighboring squares that are not marked by a flag should be free of mines.
+        </p>
+        <p>
+            The other option will highlight all of the mines on the board.
+        </p>
     </div>
     <div style="display:flex; flex-direction:row;">
         @{
             List<Game> beginnerList = (List<Game>)ViewData["Beginner"];
             List<Game> intermediateList = (List<Game>)ViewData["Intermediate"];
             List<Game> expertList = (List<Game>)ViewData["Expert"];
-                    <div style="margin-left: 10%;">
-                        <label for="beginnerList">Beginner Highscores</label>
-                        <table id="beginnerList">
+            <div style="margin-left: 10%;">
+                <h5>Beginner Highscores</h5>
+                <table id="beginnerList" style="margin-left:auto; margin-right:auto; text-align:center;">
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Score
+                        </th>
+                    </tr>
+                    @foreach(Game g in beginnerList) {
                         <tr>
-                            <th>
-                                Name
-                            </th>
-                            <th>
-                                Score
-                            </th>
+                            <td>
+                                @g.Name
+                            </td>
+                            <td>
+                                @g.Score
+                            </td>
                         </tr>
-                        @foreach(Game g in beginnerList) {
-                            <tr>
-                                <td>
-                                    @g.Name
-                                </td>
-                                <td>
-                                    @g.Score
-                                </td>
-                            </tr>
-            }
-                        </table>
-                    </div>
-                    <div style="margin-left:auto; margin-right:auto;">
-                        <label for="intermediateList">Intermediate Highscores</label>
-                        <table id="intermediateList">
+                    }
+                </table>
+            </div>
+            <div style="margin-left:auto; margin-right:auto;">
+                <h5>Intermediate Highscores</h5>
+                <table id="intermediateList" style="margin-left:auto; margin-right:auto; text-align:center;">
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Score
+                        </th>
+                    </tr>
+                    @foreach(Game g in intermediateList) {
                         <tr>
-                            <th>
-                                Name
-                            </th>
-                            <th>
-                                Score
-                            </th>
+                            <td>
+                                @g.Name
+                            </td>
+                            <td>
+                                @g.Score
+                            </td>
                         </tr>
-                        @foreach(Game g in intermediateList) {
-                            <tr>
-                                <td>
-                                    @g.Name
-                                </td>
-                                <td>
-                                    @g.Score
-                                </td>
-                            </tr>
-            }
-                        </table>
-                    </div>
-                    <div style="margin-right: 10%;">
-                        <label for="expertList">Expert Highscores</label>
-                        <table id="expertList">
-                        @foreach(Game g in expertList) {
-                            <tr>
-                                <th>
-                                    Name
-                                </th>
-                                <th>
-                                    Score
-                                </th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @g.Name
-                                </td>
-                                <td>
-                                    @g.Score
-                                </td>
-                            </tr>
-            }
-                        </table>
-                    </div>
+                    }
+                </table>
+            </div>
+            <div style="margin-right: 10%;">
+                <h5>Expert Highscores</h5>
+                <table id="expertList" style="margin-left:auto; margin-right:auto; text-align:center;">
+                @foreach(Game g in expertList) {
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Score
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            @g.Name
+                        </td>
+                        <td>
+                            @g.Score
+                        </td>
+                    </tr>
+                }
+                </table>
+            </div>
         }
     </div>
 </body>

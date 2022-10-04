@@ -69,7 +69,7 @@
             <h3 id="gameStatus"></h3>
             <form asp-controller="Games" asp-action="postHighScore" method="post" style="display: flex; flex-direction: column; align-items: center;">
                 <div>
-                    <label for="Name">Username (3 characters):</label>
+                    <label for="Name" id="NameLabel">Username (3 characters):</label>
                     <input type="text" id="Name" name="Name" placeholder="Enter Name Here" maxlength="3" minlength="3"/>
                 </div>
                 <p id="scoreLabel" style="margin:auto;"></p>
