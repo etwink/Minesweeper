@@ -345,15 +345,17 @@
                 document.getElementById("scoreSubmit").remove();
                 document.getElementById("NameLabel").remove();
                 document.getElementById("Name").remove();
-                if (document.getElementById("effectiveLabelCheck").checked) {
-                    document.getElementById("effectiveLabelCheck").click();
-                }
             }
         }
         else {
             document.getElementById("gameStatus").innerHTML = "Loser :(";
             document.getElementById("scoreLabel").innerHTML = "Score: --";
             document.getElementById("scoreSubmit").remove();
+            document.getElementById("NameLabel").remove();
+            document.getElementById("Name").remove();
+        }
+        if (document.getElementById("effectiveLabelCheck").checked) {
+            document.getElementById("effectiveLabelCheck").click();
         }
         document.getElementById("overlay").style.display = "block";
     }
